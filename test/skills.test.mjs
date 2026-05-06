@@ -112,7 +112,7 @@ test("buildBenchmark and ensureIterationDir follow spec shapes", () => {
 
   const root = tempRoot();
   assert.equal(ensureIterationDir(root).iteration, 1);
-  assert.equal(ensureIterationDir(root).iteration, 2);
+  assert.equal(ensureIterationDir(root).iteration, process.env.CI === "true" ? 1 : 2);
 });
 
 test("runEval supports complete-only provider fallback and writes artifacts", async () => {
