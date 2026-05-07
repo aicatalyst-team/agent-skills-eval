@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented here.
 
+## 0.1.1
+
+- Improve npm package discoverability metadata.
+- Add repository, homepage, bugs, funding, and expanded package keywords to the publish payload.
+- Align package metadata with the GitHub repository and documentation site.
+
 ## 0.1.0
 
 Initial public release.
