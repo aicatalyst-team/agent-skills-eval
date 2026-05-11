@@ -22,8 +22,10 @@ spec:
         - name: agent-skills-eval
           image: quay.io/aicatalyst/agent-skills-eval-agent-skills-eval:latest
           imagePullPolicy: Always
-          command: ["node"]
-          args: ["dist/cli.js", "--version"]
+          command: ["/bin/sh"]
+          args:
+            - "-c"
+            - "node -e \"const pkg = JSON.parse(require('fs').readFileSync('package.json','utf8')); console.log(pkg.version);\""
           resources:
             requests:
               memory: "256Mi"
