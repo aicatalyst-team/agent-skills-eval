@@ -1,0 +1,39 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: agent-skills-eval-build-integrity
+  namespace: agent-skills-eval
+  labels:
+    app.kubernetes.io/name: agent-skills-eval
+    app.kubernetes.io/component: agent-skills-eval
+    app.kubernetes.io/managed-by: autopoc
+    poc.autopoc/scenario: build-integrity
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 10
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: agent-skills-eval
+        app.kubernetes.io/component: agent-skills-eval
+        poc.autopoc/scenario: build-integrity
+    spec:
+      containers:
+        - name: agent-skills-eval
+          image: quay.io/aicatalyst/agent-skills-eval-agent-skills-eval:latest
+          imagePullPolicy: Always
+          command: ["ls"]
+          args: ["-la", "dist/cli.js", "dist/index.js", "dist/provider.js", "dist/config.js"]
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+      restartPolicy: Never

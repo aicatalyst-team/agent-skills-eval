@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: agent-skills-eval
+  labels:
+    app.kubernetes.io/name: agent-skills-eval
+    app.kubernetes.io/managed-by: autopoc
