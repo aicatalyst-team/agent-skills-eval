@@ -10,7 +10,7 @@ metadata:
     poc.autopoc/scenario: build-integrity
 spec:
   backoffLimit: 1
-  activeDeadlineSeconds: 10
+  activeDeadlineSeconds: 120
   template:
     metadata:
       labels:
@@ -22,8 +22,10 @@ spec:
         - name: agent-skills-eval
           image: quay.io/aicatalyst/agent-skills-eval-agent-skills-eval:latest
           imagePullPolicy: Always
-          command: ["ls"]
-          args: ["-la", "dist/cli.js", "dist/index.js", "dist/provider.js", "dist/config.js"]
+          command: ["/bin/sh"]
+          args:
+            - "-c"
+            - "ls -la dist/cli.js dist/index.js dist/provider.js dist/config.js"
           resources:
             requests:
               memory: "256Mi"
